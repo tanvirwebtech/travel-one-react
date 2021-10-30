@@ -1,0 +1,19 @@
+.nav-mobile {
+  width: 100%;
+  margin: 0 auto;
+  background: #fff;
+  position: absolute;
+  top: 70px;
+  height: 100%;
+  right: 0;
+  text-align: center;
+  z-index: 9589898;
+}
+.nav-height {
+  height: auto;
+}
+.nav-link-mobile {
+  display: block;
+  margin: 30px 0;
+  font-weight: 500;
+}

@@ -1,0 +1,9 @@
+.bookings table tr {
+    border-bottom: rgb(144, 198, 248);
+}
+.bookings table tr td {
+    padding: 20px;
+}
+.status {
+    box-sizing: content-box;
+}
