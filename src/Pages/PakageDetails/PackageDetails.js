@@ -10,7 +10,7 @@ const PackageDetails = () => {
     const { user } = useAuth();
     const { register, handleSubmit, reset } = useForm();
     useEffect(() => {
-        fetch(`http://localhost:5000/packages/${id}`)
+        fetch(`https://eerie-nightmare-64183.herokuapp.com/packages/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setSinglePackage(data);
@@ -19,23 +19,27 @@ const PackageDetails = () => {
     const onSubmit = (data) => {
         data["status"] = "pending";
         axios
-            .post("http://localhost:5000/bookings", data)
+            .post("https://eerie-nightmare-64183.herokuapp.com/bookings", data)
             .then((res) => console.log(res));
 
         alert("Package added on the queue");
         reset();
     };
-    // const onSubmit = (data) => {
-    //     console.log(data);
-    // };
     return (
         <div className="mt-6">
             <h2 className="text-4xl text-greenblue-dark my-5 font-semibold">
                 Book This Package
             </h2>
-            <div className="details-body grid grid-cols-2 w-11/12 mt-10 mx-auto gap-4">
+            <div className="details-body grid md:grid-cols-2 sm:grid-cols-1 grid-cols-1 py-8 w-11/12 mt-10 mx-auto gap-4">
                 <div className="details">
-                    <h2 className="text-3xl font-semibold">
+                    <div className="thumb">
+                        <img
+                            src={singlePackage.img}
+                            alt=""
+                            className="mx-auto"
+                        />
+                    </div>
+                    <h2 className="text-3xl my-4 font-semibold text-navyblue">
                         {singlePackage.packageName}
                     </h2>
                     <p className="py-3">

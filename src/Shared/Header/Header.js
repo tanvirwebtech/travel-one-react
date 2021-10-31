@@ -17,7 +17,7 @@ const Header = () => {
         }
     };
     return (
-        <div className="header ">
+        <div className="header">
             <div className="container mx-auto">
                 <nav className="flex items-center justify-between">
                     <div className="logo w-20">

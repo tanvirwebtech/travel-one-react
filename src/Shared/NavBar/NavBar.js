@@ -26,7 +26,7 @@ const NavBar = (props) => {
                         className={
                             mobile
                                 ? "nav-link-mobile "
-                                : "nav-link px-3 py-2 mx-2 text-customGrey hover:text-greenblue-dark"
+                                : "nav-link px-3 py-2 mx-2 font-medium transition duration-300 text-navyblue hover:text-greenblue-dark"
                         }
                         to={item.to}
                         onClick={onClick}
@@ -43,7 +43,7 @@ const NavBar = (props) => {
                               className={
                                   mobile
                                       ? "nav-link-mobile "
-                                      : "nav-link px-2 py-2 mx-4 text-customGrey hover:text-greenblue-dark"
+                                      : "nav-link px-2 py-2 mx-4 font-medium text-navyblue transition duration-300 hover:text-greenblue-dark"
                               }
                           >
                               {item.itemName}
@@ -53,7 +53,12 @@ const NavBar = (props) => {
 
                 {user.email ? (
                     <>
-                        <button onClick={() => logout()}>Log out</button>
+                        <button
+                            onClick={() => logout()}
+                            className="bg-navyblue text-white font-medium px-2 py-1 rounded-md"
+                        >
+                            Log out
+                        </button>
                         <img
                             src={user.photoURL}
                             title={user.displayName}
@@ -63,7 +68,11 @@ const NavBar = (props) => {
                     </>
                 ) : (
                     <>
-                        <NavLink to="/login">Login</NavLink>
+                        <NavLink to="/login">
+                            <span className="bg-navyblue text-white font-medium px-2 py-1 rounded-md">
+                                Login
+                            </span>
+                        </NavLink>
                     </>
                 )}
             </div>

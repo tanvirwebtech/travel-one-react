@@ -5,7 +5,10 @@ const AddTourPackage = () => {
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = (data) => {
         axios
-            .post("http://localhost:5000/add-package", data)
+            .post(
+                "https://eerie-nightmare-64183.herokuapp.com/add-package",
+                data
+            )
             .then((res) => console.log(res));
         reset();
     };

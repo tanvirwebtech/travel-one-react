@@ -3,27 +3,55 @@ import React, { useEffect, useState } from "react";
 const AllBookings = () => {
     const [allBookings, setAllBookkings] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/all-bookings")
+        fetch("https://eerie-nightmare-64183.herokuapp.com/all-bookings")
             .then((res) => res.json())
             .then((data) => setAllBookkings(data));
     }, []);
+
+    // Handling Approve
     const handleApprove = (id) => {
         const booking = allBookings.find((booking) => booking._id === id);
         booking.status = "approved";
         // console.log(booking);
-        fetch(`http://localhost:5000/status-update/${id}`, {
-            method: "PUT",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify(booking),
-        })
+        fetch(
+            `https://eerie-nightmare-64183.herokuapp.com/status-update/${id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(booking),
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 if (data.modifiedCount) {
                     alert("Updated successfu!!");
                 }
             });
+    };
+
+    // Handling Delete
+    const handleDelete = (id) => {
+        const confirmation = window.confirm("Are You sure??");
+        if (confirmation) {
+            fetch(
+                `https://eerie-nightmare-64183.herokuapp.com/delete-booking/${id}`,
+                {
+                    method: "DELETE",
+                }
+            )
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    const rest = allBookings.filter(
+                        (booking) => booking._id !== id
+                    );
+                    allBookings(rest);
+                });
+        } else {
+            return;
+        }
     };
     return (
         <div>
@@ -61,10 +89,18 @@ const AllBookings = () => {
                             {booking.packageName}
                         </div>
                         <div className="px-4 py-2 text-center action">
-                            <button onClick={() => handleApprove(booking._id)}>
-                                Approve
+                            <button
+                                className="px-2 py-1 bg-green-600 text-white hover:bg-green-400 transition duration-300 mx-2"
+                                onClick={() => handleApprove(booking._id)}
+                            >
+                                Approve<i className="fas fa-check-circle"></i>
                             </button>
-                            <button>Delete</button>
+                            <button
+                                className="px-2 py-1 bg-yellow-600 text-white hover:bg-red-400 transition duration-300 mx-2"
+                                onClick={() => handleDelete(booking._id)}
+                            >
+                                Delete
+                            </button>
                         </div>
                     </div>
                 ))}

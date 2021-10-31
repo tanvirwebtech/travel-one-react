@@ -5,7 +5,9 @@ const MyBookings = () => {
     const { user } = useAuth();
     const [myBookings, setMyBookings] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/my-bookings/${user.email}`)
+        fetch(
+            `https://eerie-nightmare-64183.herokuapp.com/my-bookings/${user.email}`
+        )
             .then((res) => res.json())
             .then((data) => setMyBookings(data));
     }, []);
@@ -13,9 +15,12 @@ const MyBookings = () => {
     const handleDelete = (id) => {
         const confirmation = window.confirm("Are You sure??");
         if (confirmation) {
-            fetch(`http://localhost:5000/delete-booking/${id}`, {
-                method: "DELETE",
-            })
+            fetch(
+                `https://eerie-nightmare-64183.herokuapp.com/delete-booking/${id}`,
+                {
+                    method: "DELETE",
+                }
+            )
                 .then((res) => res.json())
                 .then((data) => {
                     console.log(data);
@@ -63,7 +68,7 @@ const MyBookings = () => {
                                             handleDelete(booking._id)
                                         }
                                     >
-                                        delete
+                                        delete <i className="fas fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
