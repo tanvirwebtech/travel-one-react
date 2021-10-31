@@ -47,7 +47,7 @@ const AllBookings = () => {
                     const rest = allBookings.filter(
                         (booking) => booking._id !== id
                     );
-                    allBookings(rest);
+                    setAllBookkings(rest);
                 });
         } else {
             return;
